@@ -1,0 +1,75 @@
+{
+  "hubId": "aLeSoB3QrPKTlKVxCs8d",
+  "active": false,
+  "name": "Usage Reporter",
+  "version": "1.0.0",
+  "description": "Reports AnythingLLM usage statistics — message counts, token usage, model activity, and system configuration across all workspaces. IMPORTANT: Always display the tool result exactly as returned, inside a code block, without reformatting or summarizing.",
+  "author": "saulcutter",
+  "author_url": "https://hub.anythingllm.com/u/saulcutter",
+  "license": "MIT",
+  "examples": [
+    {
+      "prompt": "How many messages have I sent in the last hour?",
+      "call": "{\"timeframe\": \"1h\"}"
+    },
+    {
+      "prompt": "Show me my usage stats for the last 24 hours.",
+      "call": "{\"timeframe\": \"24h\"}"
+    },
+    {
+      "prompt": "Give me a full usage report for the past week.",
+      "call": "{\"timeframe\": \"7d\"}"
+    },
+    {
+      "prompt": "Show my system configuration and instance info.",
+      "call": "{\"timeframe\": \"system\"}"
+    },
+    {
+      "prompt": "What models have I been using this week?",
+      "call": "{\"timeframe\": \"7d\"}"
+    },
+    {
+      "prompt": "How many tokens have I used today?",
+      "call": "{\"timeframe\": \"24h\"}"
+    },
+    {
+      "prompt": "Give me a usage report.",
+      "call": "{\"timeframe\": \"24h\"}"
+    },
+    {
+      "prompt": "Show me my AnythingLLM system stats.",
+      "call": "{\"timeframe\": \"system\"}"
+    }
+  ],
+  "setup_args": {
+    "ANYTHINGLLM_API_KEY": {
+      "type": "string",
+      "required": true,
+      "input": {
+        "type": "text",
+        "default": "",
+        "placeholder": "your-api-key-here",
+        "hint": "Your AnythingLLM API key. Go to Settings → API Keys → Generate New API Key, then paste it here."
+      }
+    },
+    "ANYTHINGLLM_URL": {
+      "type": "string",
+      "required": false,
+      "input": {
+        "type": "text",
+        "default": "http://localhost:3001",
+        "placeholder": "http://localhost:3001",
+        "hint": "Base URL of your AnythingLLM instance. Default is correct for local Docker installs on port 3001."
+      }
+    }
+  },
+  "entrypoint": {
+    "file": "handler.js",
+    "params": {
+      "timeframe": {
+        "description": "The time period to analyze. Options: 1h (last hour), 24h (last 24 hours), 7d (past 7 days), system (instance configuration and model info). Always display the returned report verbatim in a code block.",
+        "type": "string"
+      }
+    }
+  }
+}
